@@ -157,6 +157,24 @@
 </div>
 
   <script>
+  // Prefill non-dropdown fields from URL parameters
+  function getParam(name) {
+    const url = new URL(window.location.href);
+    return url.searchParams.get(name) || "";
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const fields = ["firstName", "lastName", "email", "phone", "state"];
+    fields.forEach(f => {
+      const el = document.getElementById(f);
+      if (el) {
+        const val = getParam(f);
+        if (val) el.value = decodeURIComponent(val);
+      }
+    });
+  });
+
+  // Handle submission
   document.getElementById("taxForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -174,7 +192,6 @@
     params.append("lead_custom_value[TaxAmount]", document.getElementById("amountOwed").value);
     params.append("lead_custom_value[TaxType]", document.getElementById("typeOfDebt").value);
     params.append("lead_custom_value[FileStatus]", document.getElementById("filingStatus").value);
-
 
     params.append("lead[test]", "true");
     params.append("lead[media_type]", "noncallcenter");
