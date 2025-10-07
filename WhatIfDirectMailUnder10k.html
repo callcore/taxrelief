@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tax Debt Information Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f9;
+      margin: 0;
+      padding: 10px;
+    }
+    .form-wrapper {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-top: 6px solid #007bff;
+    }
+    .form-wrapper h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007bff;
+      font-size: 1.6rem;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #333;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+    .form-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .form-row .form-group {
+      flex: 1;
+      min-width: 200px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #responseMessage {
+      margin-top: 15px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="form-wrapper">
+  <h2>Tax Debt Information Form</h2>
+  <form id="taxForm">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" required>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+    </div>
+
+<div class="form-group">
+  <label for="state">State</label>
+  <select id="state" name="state" required>
+    <option value="">Select...</option>
+    <option value="AL">AL</option>
+    <option value="AK">AK</option>
+    <option value="AZ">AZ</option>
+    <option value="AR">AR</option>
+    <option value="CA">CA</option>
+    <option value="CO">CO</option>
+    <option value="CT">CT</option>
+    <option value="DE">DE</option>
+    <option value="FL">FL</option>
+    <option value="GA">GA</option>
+    <option value="HI">HI</option>
+    <option value="ID">ID</option>
+    <option value="IL">IL</option>
+    <option value="IN">IN</option>
+    <option value="IA">IA</option>
+    <option value="KS">KS</option>
+    <option value="KY">KY</option>
+    <option value="LA">LA</option>
+    <option value="ME">ME</option>
+    <option value="MD">MD</option>
+    <option value="MA">MA</option>
+    <option value="MI">MI</option>
+    <option value="MN">MN</option>
+    <option value="MS">MS</option>
+    <option value="MO">MO</option>
+    <option value="MT">MT</option>
+    <option value="NE">NE</option>
+    <option value="NV">NV</option>
+    <option value="NH">NH</option>
+    <option value="NJ">NJ</option>
+    <option value="NM">NM</option>
+    <option value="NY">NY</option>
+    <option value="NC">NC</option>
+    <option value="ND">ND</option>
+    <option value="OH">OH</option>
+    <option value="OK">OK</option>
+    <option value="OR">OR</option>
+    <option value="PA">PA</option>
+    <option value="RI">RI</option>
+    <option value="SC">SC</option>
+    <option value="SD">SD</option>
+    <option value="TN">TN</option>
+    <option value="TX">TX</option>
+    <option value="UT">UT</option>
+    <option value="VT">VT</option>
+    <option value="VA">VA</option>
+    <option value="WA">WA</option>
+    <option value="WV">WV</option>
+    <option value="WI">WI</option>
+    <option value="WY">WY</option>
+  </select>
+</div>
+
+
+    <div class="form-group">
+      <label for="employment">Employment</label>
+      <select id="employment" name="employment" required>
+        <option value="">Select...</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="amountOwed">How much do they say you owe (include penalties & interest)?</label>
+      <select id="amountOwed" name="amountOwed" required>
+        <option value="">Select...</option>
+        <option value="Less than $7,500">Less than $7,500</option>
+        <option value="$7,500 - $9,999">$7,500 - $9,999</option>
+        <option value="$10,000 - $14,999">$10,000 - $14,999</option>
+        <option value="$15,000 - $29,999">$15,000 - $29,999</option>
+        <option value="$30,000 - $49,999">$30,000 - $49,999</option>
+        <option value="$50,000 - $74,999">$50,000 - $74,999</option>
+        <option value="$75,000 - $99,999">$75,000 - $99,999</option>
+        <option value="Over $100,000">Over $100,000</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="typeOfDebt">Type of Tax Debt</label>
+      <select id="typeOfDebt" name="typeOfDebt" required>
+        <option value="">Select...</option>
+        <option value="Federal">Federal</option>
+        <option value="State">State</option>
+        <option value="Federal & State">Federal & State</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="filingStatus">Are you current with all tax return filings?</label>
+      <select id="filingStatus" name="filingStatus" required>
+        <option value="">Select...</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+  <div id="responseMessage"></div>
+</div>
+
+  <script>
+  // Prefill non-dropdown fields from URL parameters
+  function getParam(name) {
+    const url = new URL(window.location.href);
+    return url.searchParams.get(name) || "";
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const fields = ["firstName", "lastName", "email", "phone", "state"];
+    fields.forEach(f => {
+      const el = document.getElementById(f);
+      if (el) {
+        const val = getParam(f);
+        if (val) el.value = decodeURIComponent(val);
+      }
+    });
+  });
+
+  // Handle submission
+  document.getElementById("taxForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const baseUrl = "https://taxreliefexperts-post.leadhoop.com/incoming/leads";
+    const campaign = "D-MSsy7eF5rN-OtoWGdOGA";
+
+    const params = new URLSearchParams();
+    params.append("campaign_code", campaign);
+    params.append("lead[firstname]", document.getElementById("firstName").value);
+    params.append("lead[lastname]", document.getElementById("lastName").value);
+    params.append("lead[email]", document.getElementById("email").value);
+    params.append("lead[phone1]", document.getElementById("phone").value);
+    params.append("lead_address[state]", document.getElementById("state").value);
+    params.append("lead_custom_value[Employment]", document.getElementById("employment").value);
+    params.append("lead_custom_value[TaxAmount]", document.getElementById("amountOwed").value);
+    params.append("lead_custom_value[TaxType]", document.getElementById("typeOfDebt").value);
+    params.append("lead_custom_value[FileStatus]", document.getElementById("filingStatus").value);
+
+    params.append("lead[test]", "true");
+    params.append("lead[media_type]", "noncallcenter");
+
+    fetch(baseUrl + "?" + params.toString(), { method: "POST" })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("responseMessage").style.color = "green";
+        document.getElementById("responseMessage").innerText = "✅ Information submitted successfully!";
+        document.getElementById("taxForm").reset();
+      })
+      .catch(error => {
+        document.getElementById("responseMessage").style.color = "red";
+        document.getElementById("responseMessage").innerText = "❌ Error submitting info, please try again.";
+      });
+  });
+  </script>
+</body>
+</html>
