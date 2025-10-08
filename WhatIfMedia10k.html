@@ -246,7 +246,7 @@
     params.append("lead_custom_value[TaxType]", document.getElementById("typeOfDebt").value);
     params.append("lead_custom_value[FileStatus]", document.getElementById("filingStatus").value);
 
-    params.append("lead[test]", "true");
+    params.append("lead[test]", "false");
     params.append("lead[media_type]", "noncallcenter");
 
     fetch(baseUrl + "?" + params.toString(), { method: "POST" })
