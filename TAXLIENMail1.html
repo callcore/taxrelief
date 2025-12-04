@@ -81,6 +81,10 @@
 <div class="form-wrapper">
   <h2>Tax Debt Information Form</h2>
   <form id="taxForm">
+
+    <!-- Hidden subid2 field -->
+    <input type="hidden" id="subid2" name="subid2">
+
     <div class="form-row">
       <div class="form-group">
         <label for="firstName">First Name</label>
@@ -160,7 +164,6 @@
   </select>
 </div>
 
-
     <div class="form-group">
       <label for="employment">Employment</label>
       <select id="employment" name="employment" required>
@@ -209,58 +212,65 @@
   <div id="responseMessage"></div>
 </div>
 
-  <script>
-  // Prefill non-dropdown fields from URL parameters
-  function getParam(name) {
-    const url = new URL(window.location.href);
-    return url.searchParams.get(name) || "";
-  }
+<script>
+// Get URL parameters
+function getParam(name) {
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name) || "";
+}
 
-  window.addEventListener("DOMContentLoaded", () => {
-    const fields = ["firstName", "lastName", "email", "phone", "state"];
-    fields.forEach(f => {
-      const el = document.getElementById(f);
-      if (el) {
-        const val = getParam(f);
-        if (val) el.value = decodeURIComponent(val);
-      }
+// Prefill fields including hidden subid2
+window.addEventListener("DOMContentLoaded", () => {
+  const fields = ["firstName", "lastName", "email", "phone", "state", "subid2"];
+  fields.forEach(f => {
+    const el = document.getElementById(f);
+    if (el) {
+      const val = getParam(f);
+      if (val) el.value = decodeURIComponent(val);
+    }
+  });
+});
+
+// Handle submission
+document.getElementById("taxForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const baseUrl = "https://taxreliefexperts-post.leadhoop.com/incoming/leads";
+  const campaign = "zxjXotlVxV-33hmk-LOqlA";
+
+  const params = new URLSearchParams();
+  params.append("campaign_code", campaign);
+
+  params.append("lead[firstname]", document.getElementById("firstName").value);
+  params.append("lead[lastname]", document.getElementById("lastName").value);
+  params.append("lead[email]", document.getElementById("email").value);
+  params.append("lead[phone1]", document.getElementById("phone").value);
+  params.append("lead_address[state]", document.getElementById("state").value);
+
+  params.append("lead_custom_value[Employment]", document.getElementById("employment").value);
+  params.append("lead_custom_value[TaxAmount]", document.getElementById("amountOwed").value);
+  params.append("lead_custom_value[TaxType]", document.getElementById("typeOfDebt").value);
+  params.append("lead_custom_value[FileStatus]", document.getElementById("filingStatus").value);
+
+  // NEW: send subid2
+  params.append("lead_custom_value[subid2]", document.getElementById("subid2").value);
+
+  params.append("lead[test]", "false");
+  params.append("lead[media_type]", "noncallcenter");
+
+  fetch(baseUrl + "?" + params.toString(), { method: "POST" })
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("responseMessage").style.color = "green";
+      document.getElementById("responseMessage").innerText = "✅ Information submitted successfully!";
+      document.getElementById("taxForm").reset();
+    })
+    .catch(error => {
+      document.getElementById("responseMessage").style.color = "red";
+      document.getElementById("responseMessage").innerText = "❌ Error submitting info, please try again.";
     });
-  });
+});
+</script>
 
-  // Handle submission
-  document.getElementById("taxForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const baseUrl = "https://taxreliefexperts-post.leadhoop.com/incoming/leads";
-    const campaign = "zxjXotlVxV-33hmk-LOqlA";
-
-    const params = new URLSearchParams();
-    params.append("campaign_code", campaign);
-    params.append("lead[firstname]", document.getElementById("firstName").value);
-    params.append("lead[lastname]", document.getElementById("lastName").value);
-    params.append("lead[email]", document.getElementById("email").value);
-    params.append("lead[phone1]", document.getElementById("phone").value);
-    params.append("lead_address[state]", document.getElementById("state").value);
-    params.append("lead_custom_value[Employment]", document.getElementById("employment").value);
-    params.append("lead_custom_value[TaxAmount]", document.getElementById("amountOwed").value);
-    params.append("lead_custom_value[TaxType]", document.getElementById("typeOfDebt").value);
-    params.append("lead_custom_value[FileStatus]", document.getElementById("filingStatus").value);
-
-    params.append("lead[test]", "false");
-    params.append("lead[media_type]", "noncallcenter");
-
-    fetch(baseUrl + "?" + params.toString(), { method: "POST" })
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("responseMessage").style.color = "green";
-        document.getElementById("responseMessage").innerText = "✅ Information submitted successfully!";
-        document.getElementById("taxForm").reset();
-      })
-      .catch(error => {
-        document.getElementById("responseMessage").style.color = "red";
-        document.getElementById("responseMessage").innerText = "❌ Error submitting info, please try again.";
-      });
-  });
-  </script>
 </body>
 </html>
